@@ -1,0 +1,93 @@
+﻿<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Your Website</title>
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+            crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <!--<script src="knockout-min.js"></script>-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!--<script src="plotly-latest.min.js"></script>-->
+</head>
+
+<body>
+    <style>
+        .ballCalcContainer {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: smaller;
+        }
+        .leftCol {
+            float:left;
+            width: 50%;
+        }
+        .rightCol {
+            float: left;
+            width: 50%;
+        }
+        .ballBox {
+            border: 1px solid #C0C0C0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0px;
+            width: 550px;
+        }
+
+        .button {
+            cursor: pointer;
+            width: auto;
+            color: #808080;
+            background-color: #F0F0F0;
+            border-radius: 2px;
+            padding: 0px 3px;
+        }
+
+            .button:hover {
+                background-color: #ffffff;
+                border: 1px solid #c0c0c0;
+                padding: -1px;
+            }
+
+        .alignRight {
+            float: right;
+        }
+
+        .label {
+            text-align: right;
+            width: 150px;
+            float: left;
+        }
+
+        .input {
+            text-align: right;
+        }
+    </style>
+    <div class="ballCalcContainer">
+        <div class="leftCol">
+            <div class="ballEntries" data-bind="foreach: ballEntries">
+                <div class="ballBox">
+                    <span data-bind="click: $parent.removeBall" class="button alignRight">[X]</span>
+                    <span class="label">speed: </span><input type="text" value="100" class="input" data-bind="value: speedMps" />m/s <span data-bind="click: $parent.setAllBallsSpeed" class="button">set to all</span><br />
+                    <span class="label">speed: </span><input type="text" class="input" data-bind="value: speedFps" />ft/s <span data-bind="click: $parent.setAllBallsSpeed" class="button">set to all</span><br />
+                    <span class="label">pellet mass: </span><input type="text" value="0.2" class="input" data-bind="value: mass" />g <span data-bind="click: $parent.setAllBallsMass" class="button">set to all</span><br />
+                    <span class="label">energy: </span><input type="text" value="0.2" class="input" data-bind="value: energy" />J <span data-bind="click: $parent.setAllBallsEnergy" class="button">set to all</span><br />
+                    <span class="label">distance: </span><input type="text" value="20" class="input" data-bind="value: range" />m <span data-bind="click: $parent.setAllBallsRange" class="button">set to all</span><br />
+                    <span class="label">temperature: </span><select data-bind="options: airTemp, optionsText: function(item) { return item.temperature; }, value: airDensity" class="input"></select><span data-bind="click: $parent.setAllBallsAirTemperature" class="button">set to all</span><br />
+                    <span class="label">speed (@range):</span><input type="text" data-bind="value: speedAtDistance()" readonly="readonly" class="input" />m/s<br />
+                    <span class="label">energy (@range):</span><input type="text" data-bind="value: energyAtDistance()" readonly="readonly" class="input" />J<br />
+                    <span class="label">color: </span><select data-bind="options: colorOptions, optionsText: function(item) {return item.label; }, value: color" class="input"></select>
+                </div>
+            </div>
+            <span data-bind="click: addBallPreset" class="button">add ball firing data</span>
+        </div>
+        <div class="rightCol">
+            <div id="tester" style="width:750px;height:300px;"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        eval(function (p, a, c, k, e, d) { e = function (c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) { d[e(c)] = k[c] || e(c) } k = [function (e) { return d[e] }]; e = function () { return '\\w+' }; c = 1 }; while (c--) { if (k[c]) { p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]) } } return p }('1k=1Y.1Z(\'1X\');6 G(){i.R=6(9,o){7 p=1/2*9/1d*o*o;v p}i.17=6(9,p){v L.1W(p/9*1d*2)}i.V=6(9,o,k,1D){7 1C=8*9/1d/(k*0.1T*L.1U*0.1F*0.1F);7 1z=o*L.1J(L.E,-1D/1C);v 1z}}6 Y(){i.14=6(h){v h*3.1V}i.1v=6(C){v C*0.21}}6 1n(){i.h=Q;i.C=c Y().14(Q);i.9=0.2;i.p=c G().R(0.2,Q);i.u=1p;i.k=1.1y;i.n="#1H"};j.22.W=6(S,1K){7 19=j.28({29:S,27:6(q){7 1c=S(),1l=L.1J(10,1K),1w=1S(q)?0:+q,13=L.15(1w*1l)/1l;H(13!==1c){S(13)}26{H(q!==1c){S.23(13)}}}}).X({24:\'25\'});19(S());v 19};6 d(F){7 4=i;7 r=U;6 15(a,1i){v 2a(L.15(a+\'e\'+1i)+\'e-\'+1i)}6 1R(B){v 15(B,3)}4.h=j.O(F.h).X({W:3});4.h.N(6(q){H(!r){7 B=q||1;r=16;4.C(c Y().14(B));4.p(c G().R(4.9(),B));r=U;A.D()}});4.C=j.O(F.C).X({W:3});4.C.N(6(q){H(!r){7 B=q||1;r=16;4.h(c Y().1v(B));4.p(c G().R(4.9(),4.h()));r=U;A.D()}});4.9=j.O(F.9).X({W:3});4.9.N(6(q){H(!r){7 B=q||1;r=16;4.h(c G().17(B,4.p()));r=U;A.D()}});4.p=j.O(F.p).X({W:3});4.p.N(6(q){H(!r){7 B=q||1;r=16;7 o=c G().17(4.9(),B);4.h(o);4.C(c Y().14(o));r=U;A.D()}});4.u=j.O(F.u);4.u.N(6(q){A.D()});4.k=j.O(F.k);4.k.N(6(1o){A.D()});4.1Q=j.1m([{Z:1p,I:1.1O},{Z:20,I:1.1y},{Z:10,I:1.2k},{Z:0,I:1.2D},{Z:-10,I:1.2E}]);4.J=j.1m([{a:"#1H",f:"2F"},{a:"#2C",f:"1s"},{a:"#2B",f:"1r"},{a:"#2y",f:"1t"},{a:"#2z",f:"1u"},{a:"#2A",f:"1q"},{a:"#2H",f:"2G"},{a:"#2b",f:"2M 1G"},{a:"#2N",f:"2L 1G"},{a:"#2K",f:"T 1s"},{a:"#2J",f:"T 1r"},{a:"#2I",f:"T 1t"},{a:"#2w",f:"T 1u"},{a:"#2x",f:"T 1q"},{a:"#2i",f:"T 2j"}]);4.n=j.O(4.J()[F.n]);4.n.N(6(1o){A.D()});4.1b=6(){v c G().V(4.9(),4.h(),4.k().I,4.u())};4.2g=6(){v c G().V(4.9(),4.h(),4.k().I,4.u())}}6 1E(2c,2d){7 4=i;4.w=j.1m();4.1L=6(1B){4.w.18(c d(1B))};4.2e=6(){7 K=4.w();7 11=K.P==0?c 1n():j.2f(K[K.P-1]);H(K.P>0){7 1I=11.n.a;7 J=K[K.P-1].J();7 l=0;1x(7 z=0;z<J.P;z++){H(J[z].a==1I){l=z;2m}}l=l+1;l=l%J.P;11.n=l};4.w.18(c d(11))};4.2t=6(d){4.w.2u(d);4.D()};4.2v=6(d){4.w().M(6(b,l){b.h(d.h());b.C(d.C())})};4.2s=6(d){4.w().M(6(b,l){b.9(d.9())})};4.2r=6(d){4.w().M(6(b,l){b.p(d.p())})};4.2n=6(d){4.w().M(6(b,l){b.u(d.u())})};4.2o=6(d){4.w().M(6(b,l){b.k(d.k())})}4.D=6(){1M.2q(1k);7 1g=0;4.w().M(6(b,l){H(b.u()>1g){1g=b.u()}});4.w().M(6(b,l){7 9=b.9();7 o=b.h();7 k=b.k().I;7 n=b.n().a;1e(6(x){v 12.V(9,o,k,x)},Q,"17 "+9+"g, "+o+"m/s",n,1);1e(6(x){7 1b=12.V(9,o,k,x);v 12.R(9,1b)*Q},Q,"R "+9+"g, "+o+"m/s",n,3)})}7 12=c G();6 1e(1N,u,1j,n,1f){7 1a=[];7 1h=[];1x(7 z=0;z<u;z=z+0.5){1a.18(z);1h.18(1N(z))}7 1A={x:1a,y:1h,1j:1j,2p:{n:n,1f:1f}};7 F=[1A];1M.2l(1k,F,{2h:{t:0}})}}7 A=c 1E();j.1P(A);A.1L(c 1n());A.D();', 62, 174, '||||self||function|var||mass|value|item|new|ballViewModel||label||speedMps|this|ko|airDensity|index||color|speed|energy|newValue|innerUpdate|||range|return|ballEntries|||loop|appViewModel|val|speedFps|updatePlot||data|EnergyCalculator|if|density|colorOptions|balls|Math|forEach|subscribe|observable|length|100|Energy|target|Bright|false|SpeedAtDistance|numeric|extend|DistanceConversion|temperature||newBallModel|energyCalculator|valueToWrite|convertSpeedToFps|round|true|Speed|push|result|xAxis|speedAtDistance|current|1000|drawPlot|width|maxRange|yAxis|decimals|name|TESTER|roundingMultiplier|observableArray|ballModel|newVal|30|magenta|green|blue|cyan|red|convertSpeedToMps|newValueAsNum|for|2041|vD|trace|ballEntry|s0|distance|viewModel|006|gray|000|prevColor|pow|precision|add|Plotly|fn|1644|applyBindings|airTemp|round3|isNaN|47|PI|2808399|sqrt|tester|document|getElementById||3048|extenders|notifySubscribers|notify|always|else|write|pureComputed|read|Number|aaa|plotSpeed|plotEnergy|addBallPreset|toJS|energyAtDistance|margin|ff5|yellow|2466|plot|break|setAllBallsRange|setAllBallsAirTemperature|line|purge|setAllBallsEnergy|setAllBallsMass|removeBall|remove|setAllBallsSpeed|f55|f5f|0aa|a00|a0a|0a0|00a|2922|3413|black|brown|a5a|5ff|5f5|55f|dark|light|555'.split('|'), 0, {}))
+    </script>
+</body>
+</html>

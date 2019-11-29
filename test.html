@@ -1,0 +1,321 @@
+﻿<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Your Website</title>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+</head>
+
+<body>
+
+    <div id="calcTemplate">
+        <!--<span class="label">V:</span><input id="speedmps" type="text" value="100" class="input" data-bind="value: speedMps" />m/s<br />
+        <span class="label">V:</span><input id="speedfps" type="text" class="input" data-bind="value: speedFps" />ft/s<br />
+        <span class="label">m:</span><input id="weight" type="text" value="0.2" class="input" data-bind="value: mass" />g<br />
+        <span class="label">d:</span><input id="range" type="text" value="20" class="input" data-bind="value: range" />m<br />-->
+        <span class="label">V:</span><input type="text" value="100" class="input" data-bind="value: speedMps" />m/s<br />
+        <span class="label">V:</span><input type="text" class="input" data-bind="value: speedFps" />ft/s<br />
+        <span class="label">m:</span><input type="text" value="0.2" class="input" data-bind="value: mass" />g<br />
+        <span class="label">d:</span><input type="text" value="20" class="input" data-bind="value: range" />m<br />
+        <span class="label">air temperature:</span><select data-bind="options: airOptions, optionsText: function(item) { return item.temperature; }, value: selectedAir"></select>
+    </div>
+    <script type="text/javascript">
+        var ballDescriptionViewModel = {
+            speedMps: 100,
+            speedFps: 310,
+            mass: 0.2,
+            range: 10,
+            airOptions: ko.observableArray([
+                { temperature: 30, density: 1.1644 },
+                { temperature: 20, density: 1.2041 },
+                { temperature: 10, density: 1.2466 },
+                { temperature: 0, density: 1.2922 },
+                { temperature: -10, density: 1.3413 }
+            ]),
+            selectedAir: ko.observable(),
+            color: "black"
+        };
+
+        ko.applyBindings(ballDescriptionViewModel);
+    </script>
+
+        <div id="calcTemplate">
+            <!--<span class="label">V:</span><input id="speedmps" type="text" value="100" class="input" data-bind="value: speedMps" />m/s<br />
+            <span class="label">V:</span><input id="speedfps" type="text" class="input" data-bind="value: speedFps" />ft/s<br />
+            <span class="label">m:</span><input id="weight" type="text" value="0.2" class="input" data-bind="value: mass" />g<br />
+            <span class="label">d:</span><input id="range" type="text" value="20" class="input" data-bind="value: range" />m<br />-->
+            <span class="label">V:</span><input type="text" value="100" class="input" data-bind="value: speedMps" />m/s<br />
+            <span class="label">V:</span><input type="text" class="input" data-bind="value: speedFps" />ft/s<br />
+            <span class="label">m:</span><input type="text" value="0.2" class="input" data-bind="value: mass" />g<br />
+            <span class="label">d:</span><input type="text" value="20" class="input" data-bind="value: range" />m<br />
+            <span class="label">air temperature:</span><select data-bind="options: airOptions, optionsText: function(item) { return item.temperature; }, value: selectedAir"></select>
+
+
+
+            <div><input type="radio" name="airTemp" value="1.1644" />30 <input type="radio" name="airTemp" value="1.2041" checked />20 <input type="radio" name="airTemp" value="1.2466" />10 <input type="radio" name="airTemp" value="1.2922" />0 <input type="radio" name="airTemp" value="1.3413" />−10</div>
+            <span class="label">graph color:</span>
+            <select id="color">
+                <option value="#000" checked>black</option>
+                <option value="#00a">blue</option>
+                <option value="#0a0">green</option>
+                <option value="#0aa">cyan</option>
+                <option value="#a00">red</option>
+                <option value="#a0a">magenta</option>
+                <option value="#a5a">brown</option>
+                <option value="#aaa">light gray</option>
+                <option value="#555">dark gray</option>
+                <option value="#55f">Bright blue</option>
+                <option value="#5f5">Bright green</option>
+                <option value="#5ff">Bright cyan</option>
+                <option value="#f55">Bright red</option>
+                <option value="#f5f">Bright magenta</option>
+                <option value="#ff5">Bright yellow</option>
+            </select>
+        </div>
+
+
+        <style>
+            .label {
+                width: 200px;
+                float: left;
+                text-align: right;
+            }
+
+            .input {
+                text-align: right;
+            }
+        </style>
+        <div id="calcTemplate">
+            <span class="label">V:</span><input id="speedmps" type="text" value="100" class="input" />m/s<br />
+            <span class="label">V:</span><input id="speedfps" type="text" class="input" />ft/s<br />
+            <span class="label">m:</span><input id="weight" type="text" value="0.2" class="input" />g<br />
+            <span class="label">d:</span><input id="range" type="text" value="20" class="input" />m<br />
+            <span class="label">air temperature:</span><div><input type="radio" name="airTemp" value="1.1644" />30 <input type="radio" name="airTemp" value="1.2041" checked />20 <input type="radio" name="airTemp" value="1.2466" />10 <input type="radio" name="airTemp" value="1.2922" />0 <input type="radio" name="airTemp" value="1.3413" />−10</div>
+            <span class="label">graph color:</span>
+            <select id="color">
+                <option value="#000" checked>black</option>
+                <option value="#00a">blue</option>
+                <option value="#0a0">green</option>
+                <option value="#0aa">cyan</option>
+                <option value="#a00">red</option>
+                <option value="#a0a">magenta</option>
+                <option value="#a5a">brown</option>
+                <option value="#aaa">light gray</option>
+                <option value="#555">dark gray</option>
+                <option value="#55f">Bright blue</option>
+                <option value="#5f5">Bright green</option>
+                <option value="#5ff">Bright cyan</option>
+                <option value="#f55">Bright red</option>
+                <option value="#f5f">Bright magenta</option>
+                <option value="#ff5">Bright yellow</option>
+            </select>
+        </div>
+        <br />
+
+        <input id="b" type="button" value="Crunch ză numbers" /><br />
+        <br />
+        Muzzle values: <br />
+        <span style="width: 200px; float:left; text-align: right;">Kinetic energy:</span><input id="energy" type="text" style="text-align:right;" />J <br />
+        <span style="width: 200px; float:left; text-align: right;">Equiv speed for 0.20g:</span><input id="eqSpeed020ms" type="text" style="text-align:right;" />m/s<br />
+        <br />
+        At distance d:<br />
+        <span style="width: 200px; float:left; text-align: right;">Kinetic energy:</span><input id="energyAtD" type="text" style="text-align:right;" />J<br />
+        <span style="width: 200px; float:left; text-align: right;">V:</span><input id="speedAtD" type="text" style="text-align:right;" />m/s
+        <canvas id="plot" width="500px" height="500px"></canvas>
+        red: current values, green: 0.2g pellet at current speed, blue: 0.2g pellet at 100m/s
+        <script type="text/javascript">
+            var canvas = jQuery('#plot')[0];
+            var ctx = canvas.getContext('2d');
+            var width = canvas.width;
+            var height = canvas.height;
+            var plot = function plot(fn, range, color, lineWidth) {
+                var widthScale = (width / (range[1] - range[0])),
+                    heightScale = (height / (range[3] - range[2])),
+                    first = true;
+                ctx.beginPath();
+                for (var x = 0; x < width; x++) {
+                    var xFnVal = (x / widthScale) - range[0];
+                    var yGVal = (fn(xFnVal) - range[2]) * heightScale;
+                    yGVal = height - yGVal; // 0,0 is top-left
+                    if (first) {
+                        ctx.moveTo(x, yGVal);
+                        first = false;
+                    }
+                    else {
+                        ctx.lineTo(x, yGVal);
+                    }
+                }
+                ctx.strokeStyle = color;
+                ctx.lineWidth = lineWidth;
+                ctx.stroke();
+            };
+
+            function EnergyCalculator() {
+                this.Energy = function (mass, speed) {
+                    return 1 / 2 * mass * speed * speed;
+                }
+
+                this.Speed = function (mass, energy) {
+                    return Math.sqrt(energy / mass * 2);
+                }
+
+                this.SpeedAtDistance = function (mass, speed, airDensity, distance) {
+                    var s0 = 8 * mass / (airDensity * 0.47 * Math.PI * 0.006 * 0.006);
+                    var vD = speed * Math.pow(Math.E, -distance / s0);
+                    return vD;
+                }
+            }
+
+            function airsoftBallData(_initialData) {
+                var energy = _initialData.energy;
+                var mass = _initialData.mass;
+                var speed = _initialData.speed;
+
+                if (_initialData.energy == null && _initialData.speed == null) {
+                    throw "cannot have null energy and speed";
+                }
+
+                if (_initialData.mass == null) {
+                    throw "cannot have null mass"
+                }
+
+                this.getEnergy = function () {
+                    InitEnergy();
+                    return energy;
+                }
+
+                this.getMass = function () {
+                    return mass;
+                }
+
+                this.getSpeed = function () {
+                    InitSpeed();
+                    return speed;
+                }
+
+                this.buildFromMassAndEnergy = function (mass, energy) {
+                    return new airsoftBallData(energy, mass, EnergyCalculator.Speed(mass, energy));
+                }
+
+                this.buildFromMassAndSpeed = function (mass, speed) {
+                    return new airsoftBallData(EnergyCalculator.Energy(mass, speed), mass, speed);
+                }
+            }
+
+            function airsoftBallRangedData(airsoftBallData, airDensity) {
+                this.airsoftBallData = airsoftBallData;
+                this.airDensity = airDensity;
+
+                this.getSpeed = function (distance) {
+                    return CalcSpeedAtDistance(this.airsoftBallData, this.airDensity, distance);
+                }
+
+                this.getEnergy = function (distance) {
+                    var speed = this.getSpeed(distance);
+                    var ball = airsoftBallData.buildFromMassAndSpeed(this.airsoftBallData.mass, speed);
+                    return ball.energy;
+                }
+            }
+
+            function airsoftBall(mass, speedMps, airDensity) {
+                this.airDensity = airDensity;
+                this.energy = calcEnergy(mass, speedMps);
+                this.speedMps = speedMps;
+                this.speedFps = convertSpeedToFps(speedMps);
+                this.mass = mass;
+
+                this.setEnergy = function (energy) {
+                    this.speedMps = calcSpeed(mass, energy);
+                    this.speedFps = convertToFps(this.speedMps);
+                }
+
+                this.setMass = function (mass) {
+                    this.mass = mass;
+                    this.energy = calcEnergy(mass, speedMps);
+                }
+
+                this.setSpeedMps = function (speed) {
+                    this.speedMps = speed;
+                    this.speedFps = convertSpeedToFps(speed);
+                    this.energy = calcEnergy(mass, speedMps);
+                }
+
+                this.setSpeedFps = function (speed) {
+                    this.speedMps = convertSpeedToMps(speed);
+                    this.speedFps = speed;
+                    this.energy = calcEnergy(mass, speedMps);
+                }
+
+                this.getSpeedAtDistance = function (d) {
+                }
+
+                this.getEnergyAtDistance = function (d) {
+
+                }
+
+                function calcEnergy(mass, speed) {
+                    return 1 / 2 * mass * speed * speed;
+                }
+
+                function convertSpeedToFps(speedMps) {
+                    return speedMps * 3.2808399;
+                }
+
+                function convertSpeedToMps(speedFps) {
+                    return speedFps * 0.3048;
+                }
+
+
+            }
+
+            jQuery("#b").click(function () {
+                var speedmps = jQuery("#speedmps").val();
+                var speedfps = jQuery("#speedfps").val();
+                var mass = jQuery("#weight").val() / 1000;
+                var range = jQuery("#range").val();
+                if (speedmps.length === 0) {
+                    speedmps = speedfps * 0.3048;
+                    jQuery("#speedmps").val(round(speedmps, 3));
+                }
+                else {
+                    speedfps = speedmps * 3.2808399;
+                    jQuery("#speedfps").val(round(speedfps, 3));
+                }
+                var muzzleKineticEnergy = CalcEnergy(mass, speedmps);
+                jQuery("#energy").val(round(muzzleKineticEnergy, 3));
+                var eq20Speed = Math.sqrt(mass * speedmps * speedmps / 0.0002);
+                jQuery("#eqSpeed020ms").val(round(eq20Speed, 3));
+                var airDensity = jQuery("input[name='airTemp']:checked").val();
+                var speedAtDistance = CalcSpeedAtDistance(mass, speedmps, airDensity, range);
+                var energyAtDistance = CalcEnergy(mass, speedAtDistance);
+                jQuery("#speedAtD").val(round(speedAtDistance, 3));
+                jQuery("#energyAtD").val(round(energyAtDistance, 3));
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                plot(function (x) { return CalcSpeedAtDistance(mass, speedmps, airDensity, x); }, [0, range, 0, 200], "red", 3);
+                plot(function (x) { return 100 * CalcEnergyAtDistance(mass, speedmps, airDensity, x); }, [0, range, 0, 200], "red", 1);
+                plot(function (x) { return CalcSpeedAtDistance(0.0002, speedmps, airDensity, x); }, [0, range, 0, 200], "green", 3);
+                plot(function (x) { return 100 * CalcEnergyAtDistance(0.0002, speedmps, airDensity, x); }, [0, range, 0, 200], "green", 1);
+                plot(function (x) { return CalcSpeedAtDistance(0.0002, 100, airDensity, x); }, [0, range, 0, 200], "blue", 3);
+                plot(function (x) { return 100 * CalcEnergyAtDistance(0.0002, 100, airDensity, x); }, [0, range, 0, 200], "blue", 1);
+            });
+            function CalcEnergy(mass, speed) {
+                return 1 / 2 * mass * speed * speed;
+            }
+            function CalcSpeedAtDistance(mass, speed, airDensity, distance) {
+                var s0 = 8 * mass / (airDensity * 0.47 * Math.PI * 0.006 * 0.006);
+                var vD = speed * Math.pow(Math.E, -distance / s0);
+                return vD;
+            }
+            function CalcEnergyAtDistance(mass, speed, airDensity, distance) {
+                var speedD = CalcSpeedAtDistance(mass, speed, airDensity, distance);
+                return CalcEnergy(mass, speedD);
+            }
+            function round(value, decimals) {
+                return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+            }
+        </script>
+</body>

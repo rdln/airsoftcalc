@@ -1,0 +1,121 @@
+﻿<html>
+
+<head>
+    <title>AirsoftCalc ext.</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Your Website</title>
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+            crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="../../2017/08/airSoftCalc.min_.js"></script>
+    <!--<script src="knockout-min.js"></script>    
+    <script src="plotly-latest.min.js"></script>    
+    <script src="airSoftCalc.min.js"></script>-->
+</head>
+
+<body>
+
+    <a href=" http://blog.rdln.ro/stuff/airsoft-calculator/">back to blog.</a>
+
+    <style>
+        .ballCalcContainer {
+            font-family: sans-serif;
+            font-size: smaller;
+        }
+
+        .leftCol {
+            float: left;
+            width: 500px;
+        }
+
+        .rightCol {
+            float: left;
+            width: 1200px;
+        }
+
+        .ballBox {
+            border: 1px solid #C0C0C0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0px;
+            width: 440px;
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .button {
+            cursor: pointer;
+            width: auto;
+            color: #808080;
+            background-color: #F0F0F0;
+            border-radius: 2px;
+            padding: 0px 3px;
+        }
+
+            .button:hover {
+                background-color: #ffffff;
+                border: 1px solid #c0c0c0;
+                padding: -1px;
+            }
+
+        .alignRight {
+            float: right;
+        }
+
+        .label {
+			clear: left;
+            text-align: right;
+            width: 150px;
+            float: left;
+        }
+
+        .input {
+            text-align: right;
+            float: left;
+        }
+
+        .labelMu {
+            width: 25px;
+            float: left;
+            padding: 0px 3px;
+        }
+    </style>
+    <div class="ballCalcContainer">
+        <div class="leftCol">
+            <div class="ballEntries" data-bind="foreach: ballEntries">
+                <div class="ballBox">
+                    <span data-bind="click: $parent.removeBall" class="button alignRight">[X]</span>
+                    <span class="label">speed: </span><input type="text" value="100" class="input" data-bind="value: speedMps" /><span class="labelMu">m/s</span> <span data-bind="click: $parent.setAllBallsSpeed" class="button">set to all</span><br />
+                    <span class="label">speed: </span><input type="text" class="input" data-bind="value: speedFps" /><span class="labelMu">ft/s</span> <span data-bind="click: $parent.setAllBallsSpeed" class="button">set to all</span><br />
+                    <span class="label">pellet mass: </span><input type="text" value="0.2" class="input" data-bind="value: mass" /><span class="labelMu">g</span> <span data-bind="click: $parent.setAllBallsMass" class="button">set to all</span><br />
+                    <span class="label">energy: </span><input type="text" value="0.2" class="input" data-bind="value: energy" /><span class="labelMu">J</span> <span data-bind="click: $parent.setAllBallsEnergy" class="button">set to all</span><br />
+                    <span class="label">distance: </span><input type="text" value="20" class="input" data-bind="value: range" /><span class="labelMu">m</span> <span data-bind="click: $parent.setAllBallsRange" class="button">set to all</span><br />
+                    <span class="label">temperature: </span><select data-bind="options: airTemp, optionsText: function(item) { return item.temperature; }, value: airDensity" class="input"></select><span data-bind="click: $parent.setAllBallsAirTemperature" class="button">set to all</span><br />
+                    <span class="label">speed (@range):</span><input type="text" data-bind="value: speedAtDistance()" readonly="readonly" class="input" /><span class="labelMu">m/s</span><br />
+                    <span class="label">energy (@range):</span><input type="text" data-bind="value: energyAtDistance()" readonly="readonly" class="input" /><span class="labelMu">J</span><br />
+                    <span class="label">color: </span><select data-bind="options: colorOptions, optionsText: function(item) {return item.label; }, value: color" class="input"></select><div style="width: 20px; height: 19px; float:left;" data-bind="style:{ 'background-color' :  $data.colorRgb() }"></div><br />
+                </div>
+            </div>
+            <span data-bind="click: addBallOnClick" class="button">add ball firing data</span>
+        </div>
+        <div class="rightCol">
+            <div id="speedPlot" style="width:1000px;height:500px;"></div>
+            <div id="energyPlot" style="width:1000px;height:500px;"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var speedPlot = document.getElementById("speedPlot");
+        var energyPlot = document.getElementById("energyPlot");
+        var appViewModel = new viewModel();
+        ko.applyBindings(appViewModel);
+        appViewModel.addBallPreset(new ballModel().buildFromSpeedAndMass(90, 0.2));
+        appViewModel.addBallPreset(new ballModel().buildFromSpeedAndMass(120, 0.2));
+        appViewModel.addBallPreset(new ballModel().buildFromSpeedAndMass(130, 0.3));
+        appViewModel.updatePlot();
+    </script>
+</body>
+</html>
